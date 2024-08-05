@@ -62,9 +62,7 @@ function saveList() {
 </script>
 
 <template>
-  <div class="container">
 
-    <div class="routes">
       <input type="text" @input="setName" v-model="routePlayListName" />
       <button @click="createList">Create List</button>
       <div class="route-list">
@@ -80,8 +78,7 @@ function saveList() {
       </div>
   
   
-    </div>
-  </div>
+ 
 
 
 </template>

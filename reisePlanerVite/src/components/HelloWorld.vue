@@ -23,7 +23,6 @@ function calculateDuration(departure: string, arrival: string): string {
 </script>
 
 <template>
-  <div class="container">
     <div class="route-list-item">
       <div class="route-header">
         <div class="route-icon">🚆</div>
@@ -50,5 +49,4 @@ function calculateDuration(departure: string, arrival: string): string {
 
       <button>Add to Routelist</button>
     </div>
-  </div>
 </template>

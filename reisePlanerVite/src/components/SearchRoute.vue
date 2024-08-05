@@ -11,8 +11,6 @@ defineProps<{
 //       };
 </script>
 <template>
-  <div class="container">
-    <div class="search">
       <div class="from-to">
         <div class="from">
           <label for="from">Von:</label>
@@ -25,6 +23,4 @@ defineProps<{
       </div>
       <button>Suche nach Routen</button>
       <p>Suche nach Routen Von: {{ from }} Nach: {{ to }}</p>
-    </div>
-  </div>
 </template>
