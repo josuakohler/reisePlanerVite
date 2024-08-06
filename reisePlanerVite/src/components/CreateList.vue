@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
+import { useRouter } from 'vue-router';
+import { defineComponent } from 'vue';
 
 const props = defineProps<{
   initialRouteName?: string;
@@ -14,7 +16,18 @@ const routePlayList = reactive<
     routen: any[];
     checked: boolean;
   }>
+
+  
 >([]);
+const router = useRouter();
+
+function goToView() {
+  window.location.href = "view.html";
+
+};
+
+
+
 
 function setName(event: Event) {
   const target = event.target as HTMLInputElement;
@@ -59,6 +72,8 @@ function loadList() {
   }
 }
 
+
+
 onMounted(() => {
   loadList();
 });
@@ -75,7 +90,7 @@ onMounted(() => {
     >
       <p>{{ route.name }}</p>
       <button @click="deleteRouteList(idxList)">delete</button>
-      <button>view</button>
+      <button @click="goToView">View</button>
     </div>
   </div>
 </template>
