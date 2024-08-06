@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
 import SearchRoute from "./components/SearchRoute.vue";
 import CreateList from "./components/CreateList.vue";
 

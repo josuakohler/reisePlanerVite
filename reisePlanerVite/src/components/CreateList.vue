@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 
 const props = defineProps<{
   initialRouteName?: string;
@@ -10,13 +10,11 @@ const routePlayListName = ref(props.initialRouteName || "");
 const routePlayList = reactive<
   Array<{
     name: string;
-    id: number;
+    id: string;
     routen: any[];
     checked: boolean;
   }>
 >([]);
-
-const counter = ref(0);
 
 function setName(event: Event) {
   const target = event.target as HTMLInputElement;
@@ -33,14 +31,14 @@ function createList() {
   } else {
     routePlayList.push({
       name: routePlayListName.value,
-      id: counter.value,
+      id: Date.now().toString(), // Use timestamp as a unique ID
       routen: [],
-      checked: false, // Assuming 'checked' should start as false
+      checked: false,
     });
-    counter.value++;
+    saveList();
   }
 
-  console.log(routePlayList[counter.value - 1]);
+  console.log(routePlayList[routePlayList.length - 1]);
 }
 
 function deleteRouteList(index: number) {
@@ -48,37 +46,36 @@ function deleteRouteList(index: number) {
   saveList();
 }
 
-function viewRouteList(idxList: number) {
-  const selectedRouteList = routePlayList[idxList];
-  localStorage.setItem("selectedRouteList", JSON.stringify(selectedRouteList));
-  window.location.href = "routePlayListView.html";
-}
 function saveList() {
   localStorage.setItem("routePlayList", JSON.stringify(routePlayList));
 }
 
-// If you have a 'routes' array, define it here
-// const routes = ref([]);
+function loadList() {
+  const savedList = localStorage.getItem("routePlayList");
+  
+  if (savedList) {
+    const parsedList = JSON.parse(savedList);
+    routePlayList.splice(0, routePlayList.length, ...parsedList);
+  }
+}
+
+onMounted(() => {
+  loadList();
+});
 </script>
 
 <template>
-
-      <input type="text" @input="setName" v-model="routePlayListName" />
-      <button @click="createList">Create List</button>
-      <div class="route-list">
-        <div
-          class="route-list-item"
-          v-for="(route, idxList) in routePlayList"
-          :key="route.id"
-        >
-          <p>{{ route.name }}</p>
-          <button @click="deleteRouteList(idxList)">delete</button>
-          <button @click="viewRouteList(idxList)">view</button>
-        </div>
-      </div>
-  
-  
- 
-
-
+  <input type="text" @input="setName" v-model="routePlayListName" />
+  <button @click="createList">Create List</button>
+  <div class="route-list">
+    <div
+      class="route-list-item"
+      v-for="(route, idxList) in routePlayList"
+      :key="route.id"
+    >
+      <p>{{ route.name }}</p>
+      <button @click="deleteRouteList(idxList)">delete</button>
+      <button>view</button>
+    </div>
+  </div>
 </template>

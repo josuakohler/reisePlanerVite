@@ -9,7 +9,7 @@ body {
 .container {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 40px;
 }
 
 .routes, .route-list {
@@ -78,11 +78,12 @@ button:hover {
 
 .route-list-item {
   background-color: #1E1E1E;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
   transition: background-color 0.3s, transform 0.3s;
 }
 
