@@ -119,6 +119,8 @@ const firstConnection = computed<Connection | null>(
         />
       </datalist>
     </div>
+
+    </div>
   <button @click="searchRoutes">Suche nach Routen</button>
   <p>Suche nach Routen Von: {{ from }} Nach: {{ to }}</p>
 
